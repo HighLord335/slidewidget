@@ -14,243 +14,237 @@
 
 <style> 
 
-$menu-width: 350px;
-$scene-width: 1000px;
-$scene-height: 400px;
-
-$sections: Participantes, Pago, Tiempo, orange;
-
-$colors: (
-  Participantes: #D14541,
-  Pago: #F5D76E,
-  Tiempo: #00B16A,
-  orange: #F27935,
-  white: #fff,
-  gray: #eee
-);
-
-$pictograms: (
-  Participantes: url('https://cdn-icons-png.flaticon.com/512/3033/3033143.png'),
-  Pago: url('https://cdn-icons-png.flaticon.com/512/3626/3626425.png'),
-  Tiempo: url('https://cdn-icons-png.flaticon.com/512/809/809500.png'),
-  orange: url('https://d30y9cdsu7xlg0.cloudfront.net/png/9636-200.png')
-);
-
-@function get-color($color-name) {
-  @if map-has-key($colors, $color-name) {
-    @return map-get($colors, $color-name);
-  }
- 
-  @else {
-    @warn "This color key doesn't exist."
-  }
-}
-
-@function get-picto-url($picto-name) {
-  @if map-has-key($pictograms, $picto-name) {
-    @return map-get($pictograms, $picto-name);
-  }
- 
-  @else {
-    @warn "This pictogram key doesn't exist."
-  }
-}
-
 @keyframes slidein {
-  0% {
-    top: -$scene-height;
-    opacity: 0;
-  }
-  
-  100%{
-    opacity: 1;
-    top: 0px;
-  }
+	 0% {
+		 top: -400px;
+		 opacity: 0;
+	}
+	 100% {
+		 opacity: 1;
+		 top: 0px;
+	}
 }
-
-@keyframes slideout {
-  0% {
-    top: 0;
-    opacity: 1;
-  }
-  
-  100% {
-    top: -$scene-height;
-    opacity: 0;
-  }
+ @keyframes slideout {
+	 0% {
+		 top: 0;
+		 opacity: 1;
+	}
+	 100% {
+		 top: -400px;
+		 opacity: 0;
+	}
 }
-
-body{
-  background: get-color(gray);
-  font-family: "Tahoma";
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  
-  #scene {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    
-    width: $scene-width;
-    height: $scene-height;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background-color: get-color(white);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12),
-                0 1px 2px rgba(0,0,0,0.24);
-    overflow: hidden;
-      
-    #left-zone {
-      background: get-color(white);
-      height: 75%;
-      flex-grow: 0;
-      display: flex;
-      width: $menu-width;
-      align-items: center;
-      justify-content: left;
-      
-      .list{
-        display: flex;
-        list-style: none;
-        
-        align-content: stretch;
-        flex-direction: column;
-        flex-grow: 1;
-        
-        margin: 0;
-        padding: 0;        
-        
-        li.item {
-          
-           input[type="radio"] {
-             
-            display: none;
-            
-            & ~ label {
-              display: block;
-              opacity: 0.5;
-              height: 50px;
-              text-align: center;
-              line-height: 50px;
-              
-              &:first-letter {
-                text-transform: uppercase;
-              }
-                          
-              &:hover {
-                opacity: 0.75;
-                cursor: pointer;
-              }
-              
-              @each $item in $sections{
-                &.label_#{$item} {
+ body {
+	 background: #eee;
+	 font-family: "Tahoma";
+	 -moz-user-select: none;
+	 -webkit-user-select: none;
+	 -ms-user-select: none;
+	 user-select: none;
+}
+ body #scene {
+	 display: flex;
+	 align-items: center;
+	 justify-content: left;
+	 width: 1000px;
+	 height: 400px;
+	 position: absolute;
+	 top: 0;
+	 bottom: 0;
+	 left: 0;
+	 right: 0;
+	 margin: auto;
+	 background-color: #fff;
+	 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	 overflow: hidden;
+}
+ body #scene #left-zone {
+	 background: #fff;
+	 height: 75%;
+	 flex-grow: 0;
+	 display: flex;
+	 width: 350px;
+	 align-items: center;
+	 justify-content: left;
+}
+ body #scene #left-zone .list {
+	 display: flex;
+	 list-style: none;
+	 align-content: stretch;
+	 flex-direction: column;
+	 flex-grow: 1;
+	 margin: 0;
+	 padding: 0;
+}
+ body #scene #left-zone .list li.item input[type="radio"] {
+	 display: none;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label {
+	 display: block;
+	 opacity: 0.5;
+	 height: 50px;
+	 text-align: center;
+	 line-height: 50px;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label:first-letter {
+	 text-transform: uppercase;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label:hover {
+	 opacity: 0.75;
+	 cursor: pointer;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label.label_Participantes:before {
+	 content: " ";
+	 display: block;
+	 position: absolute;
+	 width: 50px;
+	 height: 50px;
+	 margin-left: 15px;
+	 background-image: url('https://cdn-icons-png.flaticon.com/512/3033/3033143.png');
+	 background-position: center;
+	 background-size: 75% 75%;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label.label_Pago:before {
+	 content: " ";
+	 display: block;
+	 position: absolute;
+	 width: 50px;
+	 height: 50px;
+	 margin-left: 15px;
+	 background-image: url('https://cdn-icons-png.flaticon.com/512/3626/3626425.png');
+	 background-position: center;
+	 background-size: 75% 75%;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label.label_Tiempo:before {
+	 content: " ";
+	 display: block;
+	 position: absolute;
+	 width: 50px;
+	 height: 50px;
+	 margin-left: 15px;
+	 background-image: url('https://cdn-icons-png.flaticon.com/512/809/809500.png');
+	 background-position: center;
+	 background-size: 75% 75%;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ label.label_orange:before {
+	 content: " ";
+	 display: block;
+	 position: absolute;
+	 width: 50px;
+	 height: 50px;
+	 margin-left: 15px;
+	 background-image: url('https://d30y9cdsu7xlg0.cloudfront.net/png/9636-200.png');
+	 background-position: center;
+	 background-size: 75% 75%;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content {
+	 position: absolute;
+	 left: 350px;
+	 top: -400px;
+	 width: 650px;
+	 height: 400px;
+	 animation-duration: 0.75s;
+	 animation-name: slideout;
+	 animation-timing-function: ease-out;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 flex-direction: column;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_Participantes .picto {
+	 height: 100px;
+	 width: 100px;
+	 background-image: url('https://cdn-icons-png.flaticon.com/512/3033/3033143.png');
+	 background-position: center;
+	 background-size: cover;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_Participantes h1 {
+	 color: #d14541;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_Pago .picto {
+	 height: 100px;
+	 width: 100px;
+	 background-image: url('https://cdn-icons-png.flaticon.com/512/3626/3626425.png');
+	 background-position: center;
+	 background-size: cover;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_Pago h1 {
+	 color: #f5d76e;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_Tiempo .picto {
+	 height: 100px;
+	 width: 100px;
+	 background-image: url('https://cdn-icons-png.flaticon.com/512/809/809500.png');
+	 background-position: center;
+	 background-size: cover;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_Tiempo h1 {
+	 color: #00b16a;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_orange .picto {
+	 height: 100px;
+	 width: 100px;
+	 background-image: url('https://d30y9cdsu7xlg0.cloudfront.net/png/9636-200.png');
+	 background-position: center;
+	 background-size: cover;
+	 background-repeat: no-repeat;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content.content_orange h1 {
+	 color: #f27935;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content h1:first-letter {
+	 text-transform: uppercase;
+}
+ body #scene #left-zone .list li.item input[type="radio"] ~ .content p {
+	 max-width: 50%;
+	 text-align: center;
+}
+ body #scene #left-zone .list li.item input[type="radio"]:checked ~ label {
+	 opacity: 1;
+	 animation: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+ body #scene #left-zone .list li.item input[type="radio"]:checked ~ label.label_Participantes {
+	 color: #d14541;
+	 border-right: solid 4px #d14541;
+}
+ body #scene #left-zone .list li.item input[type="radio"]:checked ~ label.label_Pago {
+	 color: #f5d76e;
+	 border-right: solid 4px #f5d76e;
+}
+ body #scene #left-zone .list li.item input[type="radio"]:checked ~ label.label_Tiempo {
+	 color: #00b16a;
+	 border-right: solid 4px #00b16a;
+}
+ body #scene #left-zone .list li.item input[type="radio"]:checked ~ label.label_orange {
+	 color: #f27935;
+	 border-right: solid 4px #f27935;
+}
+ body #scene #left-zone .list li.item input[type="radio"]:checked ~ .content {
+	 animation-duration: 0.75s;
+	 animation-name: slidein;
+	 animation-fill-mode: forwards;
+	 animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+ body #scene #middle-border {
+	 background-color: #eee;
+	 height: 75%;
+	 flex-grow: 1;
+	 max-width: 2px;
+	 z-index: 0;
+}
+ body #scene #right-zone {
+	 background: #fff;
+	 height: 100%;
+	 flex-grow: 3;
+}
  
-                  &:before {
-                    content: " ";
-                    display: block;
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    margin-left: 15px;
-                    background-image: get-picto-url($item);
-                    background-position: center;
-                    background-size: 75% 75%;
-                    background-repeat: no-repeat;
-                  }
-                }
-              }              
-            }
-              
-            & ~ .content {
-              position: absolute;
-              left: $menu-width;
-              top: -$scene-height;
-              width: $scene-width - $menu-width;
-              height: $scene-height;
-              
-              animation-duration: 0.75s;
-              animation-name: slideout;
-              animation-timing-function: ease-out;
-              
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              flex-direction: column;
-              @each $item in $sections{
-                &.content_#{$item} {
-                    
-                  .picto {
-                    height: 100px;
-                    width: 100px;
-                    background-image: get-picto-url($item);
-                    background-position: center;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                  }
-                  
-                  h1{
-                    color: get-color($item);
-                  }
-                }
-              }
-              
-              h1 {
-                &:first-letter {
-                  text-transform: uppercase;
-                }
-              }
-              p {
-                max-width: 50%;
-                text-align: center;
-              }
-            }
-            
-            &:checked{
-              & ~ label {
-                opacity: 1;
-                animation: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-                
-                @each $item in $sections{
-                  &.label_#{$item} {
-                    color: get-color($item);
-                    border-right: solid 4px get-color($item);
-                  }
-                }
-              }
-
-              & ~ .content {
-                animation-duration: 0.75s;
-                animation-name: slidein;
-                animation-fill-mode: forwards;
-                animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-              }
-            }
-          }
-        }
-      }
-    }
-    
-    #middle-border {
-      background-color: get-color(gray);
-      height: 75%;
-      flex-grow: 1;
-      max-width: 2px;
-      z-index: 0;
-    }
-    
-    #right-zone {
-      background: get-color(white);
-      height: 100%;
-      flex-grow: 3;
-    }
-  }
-}
 	
 </style>
 
@@ -258,31 +252,32 @@ body{
 	
 
 
+  <body>
   <div id="scene">
     <div id="left-zone">
       <ul class="list">
         <li class="item">
-          <input type="radio" id="radio_The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)" name="basic_carousel" value="The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)" checked="checked"/>
-          <label class="label_strawberry" for="radio_The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)">strawberry</label>
-          <div class="content content_strawberry"><span class="picto"></span>
-            <h1>strawberry</h1>
-            <p>The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)</p>
+          <input type="radio" id="radio_Se pagará a los participantes que completen 4 tareas de forma correcta tal cual se indique en las instrucciones." name="basic_carousel" value="Se pagará a los participantes que completen 4 tareas de forma correcta tal cual se indique en las instrucciones." checked="checked"/>
+          <label class="label_Participantes" for="radio_Se pagará a los participantes que completen 4 tareas de forma correcta tal cual se indique en las instrucciones.">Participantes</label>
+          <div class="content content_Participantes"><span class="picto"></span>
+            <h1>Participantes</h1>
+            <p>Se pagará a los participantes que completen 4 tareas de forma correcta tal cual se indique en las instrucciones.</p>
           </div>
         </li>
         <li class="item">
-          <input type="radio" id="radio_A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa." name="basic_carousel" value="A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa."/>
-          <label class="label_banana" for="radio_A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa.">banana</label>
-          <div class="content content_banana"><span class="picto"></span>
-            <h1>banana</h1>
-            <p>A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa.</p>
+          <input type="radio" id="radio_El pago será de un valor estimado de $50 dólares Americanos (USD) y se efectuara por Transferencia o Criptoactivos. " name="basic_carousel" value="El pago será de un valor estimado de $50 dólares Americanos (USD) y se efectuara por Transferencia o Criptoactivos. "/>
+          <label class="label_Pago" for="radio_El pago será de un valor estimado de $50 dólares Americanos (USD) y se efectuara por Transferencia o Criptoactivos. ">Pago</label>
+          <div class="content content_Pago"><span class="picto"></span>
+            <h1>Pago</h1>
+            <p>El pago será de un valor estimado de $50 dólares Americanos (USD) y se efectuara por Transferencia o Criptoactivos. </p>
           </div>
         </li>
         <li class="item">
-          <input type="radio" id="radio_The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus." name="basic_carousel" value="The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus."/>
-          <label class="label_apple" for="radio_The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus.">apple</label>
-          <div class="content content_apple"><span class="picto"></span>
-            <h1>apple</h1>
-            <p>The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus.</p>
+          <input type="radio" id="radio_Pueden participar hasta el 05 de Noviembre (finalización y cierre del programa)" name="basic_carousel" value="Pueden participar hasta el 05 de Noviembre (finalización y cierre del programa)"/>
+          <label class="label_Tiempo" for="radio_Pueden participar hasta el 05 de Noviembre (finalización y cierre del programa)">Tiempo</label>
+          <div class="content content_Tiempo"><span class="picto"></span>
+            <h1>Tiempo</h1>
+            <p>Pueden participar hasta el 05 de Noviembre (finalización y cierre del programa)</p>
           </div>
         </li>
         <li class="item">
@@ -298,6 +293,7 @@ body{
     <div id="middle-border"></div>
     <div id="right-zone"></div>
   </div>
+</body>
 
 	
  
