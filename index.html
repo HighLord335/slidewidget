@@ -14,42 +14,273 @@
 
 <style> 
 
-	/*! CSS Used from: Embedded */
-button{font-size:100%;line-height:1.15;}
-button{-webkit-appearance:button;}
-button:-moz-focusring{outline:1px dotted ButtonText;}
-a{color:#333;}
-canvas{font-feature-settings:normal!important;font-variant:normal!important;}
-*,:after,:before{box-sizing:border-box;}
-a{color:#1890ff;text-decoration:none;background-color:transparent;outline:none;cursor:pointer;-webkit-transition:color .3s;transition:color .3s;-webkit-text-decoration-skip:objects;}
-a:hover{color:#40a9ff;}
-a:active{color:#096dd9;}
-a:active,a:hover{text-decoration:none;outline:0;}
-a,button{touch-action:manipulation;}
-button{margin:0;color:inherit;font-size:inherit;font-family:inherit;line-height:inherit;}
-button{overflow:visible;}
-button{text-transform:none;}
-button{-webkit-appearance:button;}
-button::-moz-focus-inner{padding:0;border-style:none;}
-::selection{color:#fff;background:#1890ff;}
-.players-module--slidesPlayer--3frd_{position:relative;-webkit-user-select:none;-ms-user-select:none;user-select:none;outline:none;}
-.players-module--slidesPlayer--3frd_ .players-module--endState--2FSgl,.players-module--slidesPlayer--3frd_ canvas{position:absolute;top:0;left:0;width:100%;height:100%;}
-.players-module--slidesPlayer--3frd_ button{line-height:1.6em;border-radius:.8em;padding:0 1em;border:1px solid #666;background:#fafafa;color:#333;box-shadow:0 5px 10px rgba(0,0,0,.33);cursor:pointer;outline:none;}
-.players-module--slidesPlayer--3frd_ .players-module--endState--2FSgl{background-color:rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;}
-.players-module--slidesPlayer--3frd_ .players-module--ctrls--TYx0t{display:flex;flex-direction:column;align-items:center;}
-.players-module--slidesPlayer--3frd_ .players-module--ctrls--TYx0t>*{margin:8px 0;}
-.players-module--slidesPlayer--3frd_ .players-module--branding--1EVZV{position:absolute;bottom:0;left:0;width:100%;text-align:center;padding:16px;}
-.players-module--slidesPlayer--3frd_ .players-module--branding--1EVZV a,.players-module--slidesPlayer--3frd_ .players-module--branding--1EVZV a:hover{color:#fff;text-decoration:none;}
-.notionPlayer-module--player--3ix-E{position:relative;}
-.notionPlayer-module--player--3ix-E .notionPlayer-module--slidesPlayer--Uah5d{position:absolute;top:0;left:0;width:100%;height:100%;}
-.presentations-module--player--kjN6s{display:block;border:1px solid #000;border-radius:8px;box-sizing:border-box;box-shadow:0 4px 8px 0 rgba(0,0,0,.1);overflow:hidden;width:100%;padding-top:56.25%;}
+$menu-width: 350px;
+$scene-width: 1000px;
+$scene-height: 400px;
+
+$sections: Participantes, Pago, Tiempo, orange;
+
+$colors: (
+  Participantes: #D14541,
+  Pago: #F5D76E,
+  Tiempo: #00B16A,
+  orange: #F27935,
+  white: #fff,
+  gray: #eee
+);
+
+$pictograms: (
+  Participantes: url('https://cdn-icons-png.flaticon.com/512/3033/3033143.png'),
+  Pago: url('https://cdn-icons-png.flaticon.com/512/3626/3626425.png'),
+  Tiempo: url('https://cdn-icons-png.flaticon.com/512/809/809500.png'),
+  orange: url('https://d30y9cdsu7xlg0.cloudfront.net/png/9636-200.png')
+);
+
+@function get-color($color-name) {
+  @if map-has-key($colors, $color-name) {
+    @return map-get($colors, $color-name);
+  }
+ 
+  @else {
+    @warn "This color key doesn't exist."
+  }
+}
+
+@function get-picto-url($picto-name) {
+  @if map-has-key($pictograms, $picto-name) {
+    @return map-get($pictograms, $picto-name);
+  }
+ 
+  @else {
+    @warn "This pictogram key doesn't exist."
+  }
+}
+
+@keyframes slidein {
+  0% {
+    top: -$scene-height;
+    opacity: 0;
+  }
+  
+  100%{
+    opacity: 1;
+    top: 0px;
+  }
+}
+
+@keyframes slideout {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  
+  100% {
+    top: -$scene-height;
+    opacity: 0;
+  }
+}
+
+body{
+  background: get-color(gray);
+  font-family: "Tahoma";
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  #scene {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    
+    width: $scene-width;
+    height: $scene-height;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: get-color(white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12),
+                0 1px 2px rgba(0,0,0,0.24);
+    overflow: hidden;
+      
+    #left-zone {
+      background: get-color(white);
+      height: 75%;
+      flex-grow: 0;
+      display: flex;
+      width: $menu-width;
+      align-items: center;
+      justify-content: left;
+      
+      .list{
+        display: flex;
+        list-style: none;
+        
+        align-content: stretch;
+        flex-direction: column;
+        flex-grow: 1;
+        
+        margin: 0;
+        padding: 0;        
+        
+        li.item {
+          
+           input[type="radio"] {
+             
+            display: none;
+            
+            & ~ label {
+              display: block;
+              opacity: 0.5;
+              height: 50px;
+              text-align: center;
+              line-height: 50px;
+              
+              &:first-letter {
+                text-transform: uppercase;
+              }
+                          
+              &:hover {
+                opacity: 0.75;
+                cursor: pointer;
+              }
+              
+              @each $item in $sections{
+                &.label_#{$item} {
+ 
+                  &:before {
+                    content: " ";
+                    display: block;
+                    position: absolute;
+                    width: 50px;
+                    height: 50px;
+                    margin-left: 15px;
+                    background-image: get-picto-url($item);
+                    background-position: center;
+                    background-size: 75% 75%;
+                    background-repeat: no-repeat;
+                  }
+                }
+              }              
+            }
+              
+            & ~ .content {
+              position: absolute;
+              left: $menu-width;
+              top: -$scene-height;
+              width: $scene-width - $menu-width;
+              height: $scene-height;
+              
+              animation-duration: 0.75s;
+              animation-name: slideout;
+              animation-timing-function: ease-out;
+              
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              @each $item in $sections{
+                &.content_#{$item} {
+                    
+                  .picto {
+                    height: 100px;
+                    width: 100px;
+                    background-image: get-picto-url($item);
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                  }
+                  
+                  h1{
+                    color: get-color($item);
+                  }
+                }
+              }
+              
+              h1 {
+                &:first-letter {
+                  text-transform: uppercase;
+                }
+              }
+              p {
+                max-width: 50%;
+                text-align: center;
+              }
+            }
+            
+            &:checked{
+              & ~ label {
+                opacity: 1;
+                animation: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+                
+                @each $item in $sections{
+                  &.label_#{$item} {
+                    color: get-color($item);
+                    border-right: solid 4px get-color($item);
+                  }
+                }
+              }
+
+              & ~ .content {
+                animation-duration: 0.75s;
+                animation-name: slidein;
+                animation-fill-mode: forwards;
+                animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    #middle-border {
+      background-color: get-color(gray);
+      height: 75%;
+      flex-grow: 1;
+      max-width: 2px;
+      z-index: 0;
+    }
+    
+    #right-zone {
+      background: get-color(white);
+      height: 100%;
+      flex-grow: 3;
+    }
+  }
+}
 	
 </style>
 
 <body>
 	
 
-<div class="notionPlayer-module--player--3ix-E presentations-module--player--kjN6s"><div class="players-module--slidesPlayer--3frd_ notionPlayer-module--slidesPlayer--Uah5d" tabindex="0"><canvas width="1532" height="864"></canvas><div class="players-module--endState--2FSgl"><div class="players-module--ctrls--TYx0t"><button>Replay</button></div><div class="players-module--branding--1EVZV"><a href="/" target="_top">made on snackthis.co</a></div></div></div></div>	
+- var datas = { 'strawberry': 'The garden strawberry (or simply strawberry /ˈstrɔːbᵊri/; Fragaria × ananassa) is a widely grown hybrid species of the genus Fragaria (collectively known as the strawberries)', 'banana': 'A banana is an edible fruit, botanically a berry, produced by several kinds of large herbaceous flowering plants in the genus Musa.', 'apple': 'The apple tree (Malus domestica) is a deciduous tree in the rose family best known for its sweet, pomaceous fruit, the apple. It is cultivated worldwide as a fruit tree, and is the most widely grown species in the genus Malus.', 'orange': 'The orange (specifically, the sweet orange) is the fruit of the citrus species Citrus × sinensis in the family Rutaceae.'}
+
+body
+  div#scene
+    
+    #left-zone
+      ul.list
+        each val, index in datas
+          li.item
+              if index == "strawberry"
+                input(type="radio", id='radio_' + val name="basic_carousel" value=val checked)
+              else
+                input(type="radio", id='radio_' + val name="basic_carousel" value=val) 
+              
+              label(for='radio_' + val, class='label_' + index)
+                | #{index}
+              div(class='content content_' + index)
+                span(class='picto')
+                h1
+                  | #{index}
+                p
+                  | #{val}
+    #middle-border
+    #right-zone
 	
  
 </body>
